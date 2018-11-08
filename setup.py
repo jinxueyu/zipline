@@ -238,8 +238,8 @@ def read_requirements(path,
         return list(reqs)
 
 
-def install_requires(strict_bounds=False, conda_format=False):
-    return read_requirements('etc/requirements.txt',
+def install_requires(strict_bounds=True, conda_format=False):
+    return read_requirements('etc/requirements.in',
                              strict_bounds=strict_bounds,
                              conda_format=conda_format)
 
