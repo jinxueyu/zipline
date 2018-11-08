@@ -105,6 +105,6 @@ script:
 after_success:
   - coveralls
 
-branches:
-  only:
-    - master
+#branches:
+#  only:
+#    - master
