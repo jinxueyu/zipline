@@ -10,12 +10,15 @@
 alembic==0.7.7
 bcolz==0.12.1
 bottleneck==1.0.0
+certifi==2018.8.24        # via requests
+chardet==3.0.4            # via requests
 click==7.0.0
 contextlib2==0.4.0
 decorator==4.0.0          # via networkx
 empyrical==0.5.0
 funcsigs==1.0.2           # via python-interface
 h5py==2.7.1
+idna==2.7                 # via requests
 intervaltree==2.1.0
 iso3166==0.9
 logbook==0.12.5
@@ -32,12 +35,13 @@ python-dateutil==2.4.2    # via pandas
 python-interface==1.4.0
 pytz==2018.5
 requests-file==1.4.1      # via pandas-datareader
-requests==2.9.1
+requests==2.20.1
 scipy==0.17.1             # via empyrical
 six==1.10.0
 sortedcontainers==1.4.4   # via intervaltree
-sqlalchemy==1.0.8
+sqlalchemy==1.1.18
 tables==3.4.3
 toolz==0.8.2
-trading-calendars==1.5.1
+trading-calendars==1.6.1
 typing==3.6.2             # via python-interface
+urllib3==1.23             # via requests
