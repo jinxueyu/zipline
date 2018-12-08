@@ -47,3 +47,7 @@ toolz==0.8.2
 trading-calendars==1.6.1
 typing==3.6.2             # via python-interface
 urllib3==1.23             # via requests
+
+# The following packages are considered to be unsafe in a requirements file:
+# pip
+# setuptools
