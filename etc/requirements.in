@@ -22,5 +22,6 @@ empyrical>=0.5.0
 bottleneck>=1.0.0
 python-interface>=1.4.0
 networkx>=1.9.1,<2.0
+numexpr==2.6.1
 
 #statsmodels==0.6.1

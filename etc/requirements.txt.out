@@ -14,7 +14,7 @@ click==7.0.0
 contextlib2==0.4.0
 decorator==4.0.0          # via networkx
 empyrical==0.5.0
-funcsigs==1.0.2;python_version<"3"           # via python-interface
+funcsigs==1.0.2           # via python-interface
 h5py==2.7.1
 intervaltree==2.1.0
 iso3166==0.9
@@ -24,7 +24,7 @@ mako==1.0.1               # via alembic
 markupsafe==0.23          # via mako
 multipledispatch==0.6.0
 networkx==1.9.1
-numexpr==2.6.1            # via tables
+numexpr==2.6.1
 numpy==1.11.3
 pandas-datareader==0.2.1
 pandas==0.18.1
@@ -40,4 +40,4 @@ sqlalchemy==1.0.8
 tables==3.4.3
 toolz==0.8.2
 trading-calendars==1.5.1
-typing==3.6.2;python_version<"3.5"            # via python-interface
+typing==3.6.2             # via python-interface
