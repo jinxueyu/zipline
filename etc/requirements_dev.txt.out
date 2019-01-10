@@ -4,8 +4,6 @@
 #
 #    pip-compile --output-file requirements_dev.txt.out requirements.in requirements_dev.in requirements_blaze.in requirements_talib.in requirements_docs.txt
 #
---index-url https://wheels.dynoquant.com/simple/
---extra-index-url https://pypi.python.org/simple/
 
 -e git+git://github.com/quantopian/blaze.git@310605323449e375e81a0cf04011c507cd126ef6#egg=blaze-dev
 -e git+git://github.com/quantopian/datashape.git@bf06a41dc0908baf7c324aeacadba8820468ee78#egg=datashape-dev

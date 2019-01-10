@@ -4,8 +4,6 @@
 #
 #    pip-compile --output-file ./requirements.txt.out ./requirements.in
 #
---index-url https://wheels.dynoquant.com/simple/
---extra-index-url https://pypi.python.org/simple/
 
 alembic==0.7.7
 bcolz==0.12.1
