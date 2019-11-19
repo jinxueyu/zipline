@@ -14,4 +14,4 @@ coverage>=4.0.3
 
 pdbpp>=0.9.1
 
-pip-tools>=3.2.0
+pip-tools>=4.2.0
