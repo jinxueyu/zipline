@@ -11,7 +11,7 @@ click>=4.0.0
 # Language utilities
 six>=1.10.0
 contextlib2>=0.4.0
-python-interface>=1.4.0
+python-interface>=1.5.3
 multipledispatch>=0.6.0
 # FUNctional programming utilities
 toolz>=0.8.2
