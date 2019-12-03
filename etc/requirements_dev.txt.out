@@ -65,7 +65,7 @@ partd==0.3.7              # via dask
 pathtools==0.1.2          # via sphinx-autobuild, watchdog
 patsy==0.4.0
 pbr==4.3.0                # via mock
-pip-tools==4.2.0
+pip-tools==4.3.0
 port-for==0.3.1           # via sphinx-autobuild
 psutil==4.3.0
 pycodestyle==2.4.0        # via flake8
@@ -102,5 +102,5 @@ watchdog==0.9.0           # via sphinx-autobuild
 werkzeug==0.12.2          # via flask
 
 # The following packages are considered to be unsafe in a requirements file:
-# pip==19.3.1
-# setuptools==41.6.0
+# pip
+# setuptools
