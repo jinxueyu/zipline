@@ -112,5 +112,5 @@ test_script:
 #  only:
 #    - master
 
-on_finish:
+on_failure:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
