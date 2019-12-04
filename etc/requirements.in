@@ -60,4 +60,4 @@ networkx>=1.9.1,<2.0
 numexpr>=2.6.1
 
 # Currency Codes
-iso4217==1.6.20180829
+iso4217>=1.6.20180829
