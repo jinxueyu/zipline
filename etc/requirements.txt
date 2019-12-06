@@ -4,9 +4,9 @@
 #
 #    pip-compile --no-index --output-file=requirements.txt requirements.in requirements_blaze.in requirements_dev.in requirements_docs.in requirements_talib.in
 #
--e git+git://github.com/quantopian/blaze.git@f26375a6708eab85b7acc7869d6c518df2f974eb#egg=blaze-dev
--e git+git://github.com/quantopian/datashape.git@cae16a85406ca4302ff1f985b74a3809be0a83a1#egg=datashape-dev
--e git+git://github.com/quantopian/odo.git@ba84238eb8dbcac4784ae7ebf62988d7e163c283#egg=odo-dev
+-e git+git://github.com/quantopian/blaze.git@f26375a6708eab85b7acc7869d6c518df2f974eb#egg=blaze
+-e git+git://github.com/quantopian/datashape.git@cae16a85406ca4302ff1f985b74a3809be0a83a1#egg=datashape
+-e git+git://github.com/quantopian/odo.git@ba84238eb8dbcac4784ae7ebf62988d7e163c283#egg=odo
 alabaster==0.7.12         # via sphinx
 alembic==0.7.7
 argh==0.26.2              # via sphinx-autobuild, watchdog
