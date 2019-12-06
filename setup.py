@@ -246,7 +246,7 @@ conda_build = os.path.basename(sys.argv[0]) in ('conda-build',  # unix
                                                 'conda-build-script.py')  # win
 
 setup_requires = setup_requirements(
-    'etc/requirements.txt',
+    'etc/requirements_build.txt',
     ('Cython', 'numpy'),
     conda_format=conda_build,
 )
