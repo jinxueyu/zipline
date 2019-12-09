@@ -4,4 +4,4 @@ dask[dataframe]==0.13.0
 -e git://github.com/quantopian/odo.git@ba84238eb8dbcac4784ae7ebf62988d7e163c283#egg=odo
 
 # Keep cytoolz version in sync with toolz version in requirements.txt
-cytoolz==0.8.2
+cytoolz>=0.8.2
