@@ -6,7 +6,7 @@ nose-timer>=0.5.0
 responses>=0.9.0
 testfixtures>=4.1.2
 
-matplotlib==1.5.3
+matplotlib>=1.5.3
 
 flake8>=3.3.0
 
