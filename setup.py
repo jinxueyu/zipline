@@ -220,7 +220,7 @@ def extras_requires(conda_format=False):
     extras = {
         extra: read_requirements('etc/requirements_{0}.in'.format(extra),
                                  conda_format=conda_format)
-        for extra in ('dev', 'talib')
+        for extra in ('dev', 'talib', 'docs')
     }
     extras['all'] = [req for reqs in extras.values() for req in reqs]
 
