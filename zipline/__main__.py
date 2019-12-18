@@ -195,6 +195,12 @@ def ipython_only(option):
     help='Print the algorithm to stdout.',
 )
 @click.option(
+    '--live',
+    is_flag=True,
+    default=False,
+    help='The algorithm live running or not.',
+)
+@click.option(
     '--metrics-set',
     default='default',
     help='The metrics set to use. New metrics sets may be registered in your'
@@ -226,6 +232,7 @@ def run(ctx,
         output,
         trading_calendar,
         print_algo,
+        live,
         metrics_set,
         local_namespace,
         blotter):
@@ -269,6 +276,7 @@ def run(ctx,
         output=output,
         trading_calendar=trading_calendar,
         print_algo=print_algo,
+        live=live,
         metrics_set=metrics_set,
         local_namespace=local_namespace,
         environ=os.environ,
