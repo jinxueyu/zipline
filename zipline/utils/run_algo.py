@@ -27,6 +27,8 @@ from zipline.extensions import load
 from zipline.algorithm import TradingAlgorithm
 from zipline.finance.blotter import Blotter
 
+from zipline.realtime.reactor import AlgorithmReactor
+
 
 class _RunAlgoError(click.ClickException, ValueError):
     """Signal an error that should have a different message if invoked from
@@ -79,6 +81,13 @@ def _run(handle_data,
 
     This is shared between the cli and :func:`zipline.run_algo`.
     """
+
+    if live:
+        algo_reactor = AlgorithmReactor(algo_path='./zipline/examples/realtime',mq_url='nats://100.116.1.62:4222')
+        algo_reactor.initial()
+        algo_reactor.start()
+        return
+
     if benchmark_returns is None:
         benchmark_returns, _ = load_market_data(environ=environ)
 

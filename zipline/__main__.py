@@ -238,24 +238,25 @@ def run(ctx,
         blotter):
     """Run a backtest for the given algorithm.
     """
-    # check that the start and end dates are passed correctly
-    if start is None and end is None:
-        # check both at the same time to avoid the case where a user
-        # does not pass either of these and then passes the first only
-        # to be told they need to pass the second argument also
-        ctx.fail(
-            "must specify dates with '-s' / '--start' and '-e' / '--end'",
-        )
-    if start is None:
-        ctx.fail("must specify a start date with '-s' / '--start'")
-    if end is None:
-        ctx.fail("must specify an end date with '-e' / '--end'")
+    if not live:
+        # check that the start and end dates are passed correctly
+        if start is None and end is None:
+            # check both at the same time to avoid the case where a user
+            # does not pass either of these and then passes the first only
+            # to be told they need to pass the second argument also
+            ctx.fail(
+                "must specify dates with '-s' / '--start' and '-e' / '--end'",
+            )
+        if start is None:
+            ctx.fail("must specify a start date with '-s' / '--start'")
+        if end is None:
+            ctx.fail("must specify an end date with '-e' / '--end'")
 
-    if (algotext is not None) == (algofile is not None):
-        ctx.fail(
-            "must specify exactly one of '-f' / '--algofile' or"
-            " '-t' / '--algotext'",
-        )
+        if (algotext is not None) == (algofile is not None):
+            ctx.fail(
+                "must specify exactly one of '-f' / '--algofile' or"
+                " '-t' / '--algotext'",
+            )
 
     trading_calendar = get_calendar(trading_calendar)
 
