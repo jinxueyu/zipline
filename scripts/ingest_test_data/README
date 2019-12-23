@@ -1,0 +1,17 @@
+将.zipline 文件夹放在工作目录下。
+例如需要在C:\Users\user_name>zipline bundles 目录下执行zipline的命令，则将zipline文件夹放在C:\Users\user_name>位置，并重命名为.zipline
+
+执行 zipline ingest -b custom-csvdir-bundle 命令将看到：
+load user extension
+<property object at 0x00000000097CD098>
+end load user extension
+ | AAPL: sid 0
+ | IBM: sid 1
+ | KO: sid 2
+ | MSFT: sid 3
+
+表示四个股票数据录入成功
+
+
+删除所有bundle   --keep-last 0
+zipline clean [-b <bundle>] --keep-last <int>
