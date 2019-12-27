@@ -1,0 +1,10 @@
+python read_live_data.py level1ShMktData
+从kafka 中读取行情数据，将行情数据输出到标准输出
+
+python format_sh_tick_to_1min_bar.py sh 60
+从标准输入接收数据，将tick 合并为1分钟bar
+为方便测试，现在的设置是每次重启都从队尾开始读数据
+从标准输出发出
+
+send_to_nats.py
+从标准输入输入，将解析好的1分钟bar 数据发送给nats
