@@ -1,5 +1,13 @@
+'''
+网格策略
+客户号：004
+股票代码：600516.sh
+基准价格：12.26
+档位价格：10%
+每次交易：100股
+'''
 def initialize(context):
-  context.client_id = "003"
+  context.client_id = "004"
   context.symbol = "600516.sh"
   context.base_price = 12.26
   context.ratio = 0.1

@@ -25,8 +25,11 @@ class AlgorithmReactor(object):
         with open(os.path.join(self._algo_path, file), 'r') as f:
           algotext = f.read()
           try:
+            # i = 0
+            # while i < 100:
             ra = RealtimeAlgorithm(script=algotext, algo_filename=file)
             self._algos.add(ra)
+          #   i = i + 1
           except:
             print("A ERROR!")
         print('Algo Reactor loaded algo:{}'.format(file))
@@ -52,13 +55,13 @@ class AlgorithmReactor(object):
     bar_data = RealtimeBarData(minute_bar=data)
     for algo in self._algos:
       if algo.symbol == bar_data.get_symbol():
-          algo.handle_data(bar_data)
+        algo.handle_data(bar_data)
         # task = self._executor.submit(algo.handle_data, (bar_data))
         # self._tasks.add(task)
       # algo.handle_data(data)
     # print(time.time())
     now = time.time() - last_time
-    print('cost time:%.6f' % now)
+    print('cost seconds:%.6f' % now)
 
   def start(self):
     # MQ连接和订阅

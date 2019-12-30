@@ -1,3 +1,11 @@
+'''
+网格策略
+客户号：001
+股票代码：002594.sz
+基准价格：47.00
+档位价格：5%
+每次交易：100股
+'''
 def initialize(context):
   context.client_id = "001"
   context.symbol = "002594.sz"
