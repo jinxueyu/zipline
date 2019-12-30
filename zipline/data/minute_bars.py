@@ -232,8 +232,12 @@ class BcolzMinuteBarMetadata(object):
                 end_session = pd.Timestamp(raw_data['end_session'], tz='UTC')
             else:
                 # No calendar info included in older versions, so
-                # default to NYSE.
-                calendar = get_calendar('XNYS')
+                # default to XSGH.
+                calendar_name = os.environ.get('__trading_calendar__', None)
+                if calendar_name is None:
+                    calendar_name = 'XSGH'
+
+                calendar = get_calendar(calendar_name)
 
                 start_session = pd.Timestamp(
                     raw_data['first_trading_day'], tz='UTC')

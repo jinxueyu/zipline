@@ -5,10 +5,9 @@ import pandas as pd
 import sqlalchemy as sa
 from toolz import valmap
 import toolz.curried.operator as op
+
 from trading_calendars import TradingCalendar, get_calendar
-
 from zipline.assets import ASSET_DB_VERSION
-
 from zipline.assets.asset_writer import check_version_info
 from zipline.assets.synthetic import make_simple_equity_info
 from zipline.data.bundles import UnknownBundle, from_bundle_ingest_dirname, \

@@ -28,8 +28,8 @@ from pandas import (
     Timestamp,
 )
 from six import iteritems, itervalues
-from trading_calendars import get_calendar
 
+from trading_calendars import get_calendar
 from zipline.api import (
     attach_pipeline,
     pipeline_output,

@@ -9,13 +9,13 @@ from click import progressbar
 from logbook import Logger
 import pandas as pd
 import requests
-from six.moves.urllib.parse import urlencode
 from six import iteritems
-from trading_calendars import register_calendar_alias
+import numpy as np
 
+from six.moves.urllib.parse import urlencode
+from trading_calendars import register_calendar_alias
 from zipline.utils.deprecate import deprecated
 from . import core as bundles
-import numpy as np
 
 log = Logger(__name__)
 
@@ -338,5 +338,5 @@ def quantopian_quandl_bundle(environ,
             log.info("Writing data to %s." % output_dir)
         tar.extractall(output_dir)
 
-
+print('--- log --- 341')
 register_calendar_alias("QUANDL", "NYSE")

@@ -127,10 +127,14 @@ def load_market_data(trading_day=None, trading_days=None, bm_symbol='SPY',
     '1month', '3month', '6month',
     '1year','2year','3year','5year','7year','10year','20year','30year'
     """
+    calendar_name = environ.get('__trading_calendar__', None)
+    if calendar_name is None:
+        calendar_name = 'XSGH'
+
     if trading_day is None:
-        trading_day = get_calendar('XNYS').day
+        trading_day = get_calendar(calendar_name).day
     if trading_days is None:
-        trading_days = get_calendar('XNYS').all_sessions
+        trading_days = get_calendar(calendar_name).all_sessions
 
     first_date = trading_days[0]
     now = pd.Timestamp.utcnow()
@@ -148,21 +152,24 @@ def load_market_data(trading_day=None, trading_days=None, bm_symbol='SPY',
         trading_day,
         environ,
     )
-    tc = ensure_treasury_data(
-        bm_symbol,
-        first_date,
-        last_date,
-        now,
-        environ,
-    )
+    # TODO change for chinese treasury data
+    # tc = ensure_treasury_data(
+    #     bm_symbol,
+    #     first_date,
+    #     last_date,
+    #     now,
+    #     environ,
+    # )
 
     # combine dt indices and reindex using ffill then bfill
-    all_dt = br.index.union(tc.index)
+    # all_dt = br.index.union(tc.index)
+    all_dt = br.index.union(br.index)
     br = br.reindex(all_dt, method='ffill').fillna(method='bfill')
-    tc = tc.reindex(all_dt, method='ffill').fillna(method='bfill')
+    # tc = tc.reindex(all_dt, method='ffill').fillna(method='bfill')
 
     benchmark_returns = br[br.index.slice_indexer(first_date, last_date)]
-    treasury_curves = tc[tc.index.slice_indexer(first_date, last_date)]
+    treasury_curves = None
+    # treasury_curves = tc[tc.index.slice_indexer(first_date, last_date)]
     return benchmark_returns, treasury_curves
 
 

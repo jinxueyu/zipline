@@ -7,7 +7,6 @@ import numpy as np
 import pandas as pd
 
 from trading_calendars import get_calendar
-
 from zipline.assets.synthetic import make_rotating_equity_info
 from zipline.data.in_memory_daily_bars import InMemoryDailyBarReader
 from zipline.pipeline.domain import (
@@ -22,7 +21,6 @@ from zipline.pipeline.loaders.equity_pricing_loader import EquityPricingLoader
 from zipline.pipeline.loaders.synthetic import NullAdjustmentReader
 from zipline.testing.predicates import assert_equal
 from zipline.testing.core import parameter_space, random_tick_prices
-
 import zipline.testing.fixtures as zf
 
 
