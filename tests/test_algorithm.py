@@ -24,15 +24,14 @@ import toolz
 from logbook import TestHandler, WARNING
 from nose_parameterized import parameterized
 from six import iteritems, itervalues, string_types
-from six.moves import range
 from testfixtures import TempDirectory
-
 import numpy as np
 import pandas as pd
 import pytz
 from pandas.core.common import PerformanceWarning
-from trading_calendars import get_calendar, register_calendar
 
+from six.moves import range
+from trading_calendars import get_calendar, register_calendar
 import zipline.api
 from zipline.api import FixedSlippage
 from zipline.assets import Equity, Future, Asset
@@ -54,7 +53,6 @@ from zipline.errors import (
     UnsupportedDatetimeFormat,
     ZeroCapitalError
 )
-
 from zipline.finance.commission import PerShare, PerTrade
 from zipline.finance.execution import LimitOrder
 from zipline.finance.order import ORDER_STATUS
@@ -129,6 +127,7 @@ from zipline.utils.events import (
     OncePerDay,
 )
 import zipline.utils.factory as factory
+
 
 # Because test cases appear to reuse some resources.
 

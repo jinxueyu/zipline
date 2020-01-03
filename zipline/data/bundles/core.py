@@ -7,9 +7,9 @@ import warnings
 from contextlib2 import ExitStack
 import click
 import pandas as pd
-from trading_calendars import get_calendar
 from toolz import curry, complement, take
 
+from trading_calendars import get_calendar
 from ..adjustments import SQLiteAdjustmentReader, SQLiteAdjustmentWriter
 from ..bcolz_daily_bars import BcolzDailyBarReader, BcolzDailyBarWriter
 from ..minute_bars import (
@@ -220,7 +220,7 @@ def _make_bundle_core():
     @curry
     def register(name,
                  f,
-                 calendar_name='NYSE',
+                 calendar_name='XSHG',
                  start_session=None,
                  end_session=None,
                  minutes_per_day=390,

@@ -21,9 +21,9 @@ import warnings
 from nose_parameterized import parameterized
 import pandas as pd
 from six import iteritems
+
 from six.moves import range, map
 from trading_calendars import get_calendar
-
 import zipline.utils.events
 from zipline.utils.events import (
     EventRule,

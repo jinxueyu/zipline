@@ -185,7 +185,7 @@ def ipython_only(option):
 @click.option(
     '--trading-calendar',
     metavar='TRADING-CALENDAR',
-    default='XNYS',
+    default='XSHG',
     help="The calendar you want to use e.g. XLON. XNYS is the default."
 )
 @click.option(
@@ -204,6 +204,13 @@ def ipython_only(option):
     '--blotter',
     default='default',
     help="The blotter to use.",
+    show_default=True,
+)
+@click.option(
+    '-k',
+    '--benchmark-symbol',
+    default='default',
+    help="benchmark symbol",
     show_default=True,
 )
 @ipython_only(click.option(
@@ -228,7 +235,8 @@ def run(ctx,
         print_algo,
         metrics_set,
         local_namespace,
-        blotter):
+        blotter,
+        benchmark_symbol):
     """Run a backtest for the given algorithm.
     """
     # check that the start and end dates are passed correctly
@@ -250,6 +258,7 @@ def run(ctx,
             " '-t' / '--algotext'",
         )
 
+    os.environ.setdefault('__trading_calendar__', trading_calendar)
     trading_calendar = get_calendar(trading_calendar)
 
     perf = _run(
@@ -274,6 +283,7 @@ def run(ctx,
         environ=os.environ,
         blotter=blotter,
         benchmark_returns=None,
+        benchmark_symbol=benchmark_symbol
     )
 
     if output == '-':

@@ -1,17 +1,9 @@
-from cpython cimport (
-    PyDict_GetItem,
-    PyObject,
-    PyList_New,
-    PyList_SET_ITEM,
-)
-from bisect import bisect_right, insort_left
+from bisect import bisect_right
 
 cimport cython
-cimport numpy as np
 import numpy as np
 import pandas as pd
 from toolz import sliding_window
-from trading_calendars.utils.pandas_utils import days_at_time
 
 from zipline.lib.adjusted_array import AdjustedArray
 from zipline.lib.adjustment cimport (

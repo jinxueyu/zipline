@@ -1,7 +1,8 @@
-import click
 import os
 import sys
 import warnings
+
+import click
 
 try:
     from pygments import highlight
@@ -73,13 +74,14 @@ def _run(handle_data,
          local_namespace,
          environ,
          blotter,
-         benchmark_returns):
+         benchmark_returns,
+         benchmark_symbol=None):
     """Run a backtest for the given algorithm.
 
     This is shared between the cli and :func:`zipline.run_algo`.
     """
     if benchmark_returns is None:
-        benchmark_returns, _ = load_market_data(environ=environ)
+        benchmark_returns, _ = load_market_data(environ=environ, bm_symbol=benchmark_symbol)
 
     if algotext is not None:
         if local_namespace:
@@ -126,7 +128,7 @@ def _run(handle_data,
             click.echo(algotext)
 
     if trading_calendar is None:
-        trading_calendar = get_calendar('XNYS')
+        trading_calendar = get_calendar('XSHG')
 
     # date parameter validation
     if trading_calendar.session_distance(start, end) < 1:
@@ -145,6 +147,8 @@ def _run(handle_data,
 
     first_trading_day = \
         bundle_data.equity_minute_bar_reader.first_trading_day
+
+    print('log {0} '.format(trading_calendar))
 
     data = DataPortal(
         bundle_data.asset_finder,

@@ -32,10 +32,10 @@ from pandas import (
     Timestamp,
 )
 from six import iteritems
-from six.moves import range
 from toolz import merge
-from trading_calendars import get_calendar
 
+from six.moves import range
+from trading_calendars import get_calendar
 from zipline.data.bar_reader import (
     NoDataAfterDate,
     NoDataBeforeDate,
