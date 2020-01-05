@@ -15,45 +15,54 @@
 import pandas as pd
 import requests
 import os
+from zipline.utils.calendars import get_calendar
 
-import tushare as ts
+# import tushare as ts
 
 # TODO 修改基准曲线
-def get_benchmark_returns(symbol):
-    """
-    Get a Series of benchmark returns from IEX associated with `symbol`.
-    Default is `SPY`.
+# def get_benchmark_returns(symbol):
+#     """
+#     Get a Series of benchmark returns from IEX associated with `symbol`.
+#     Default is `SPY`.
+#
+#     Parameters
+#     ----------
+#     symbol : str
+#         Benchmark symbol for which we're getting the returns.
+#
+#     The data is provided by IEX (https://iextrading.com/), and we can
+#     get up to 5 years worth of data.
+#     """
+#     df = None
+#
+#     if symbol == '000001.SH':
+#         pro = ts.pro_api()
+#         df = pro.index_daily(ts_code=symbol)
+#         df.index = pd.DatetimeIndex(df['trade_date'])
+#         df = df['close']
+#
+#     else:
+#         itx_token = 'pk_6e35c09fd54f4275aa78a16f4bc62d49'
+#         r = requests.get(
+#             # 'https://api.iextrading.com/1.0/stock/{}/chart/5y'.format(symbol)
+#             'https://cloud.iexapis.com/stable/stock/{}/chart/5y?token={}'.format(symbol, itx_token)
+#         )
+#         data = r.json()
+#
+#         df = pd.DataFrame(data)
+#
+#         df.index = pd.DatetimeIndex(df['date'])
+#         df = df['close']
+#
+#     return df.sort_index().tz_localize('UTC').pct_change(1).iloc[1:]
 
-    Parameters
-    ----------
-    symbol : str
-        Benchmark symbol for which we're getting the returns.
 
-    The data is provided by IEX (https://iextrading.com/), and we can
-    get up to 5 years worth of data.
-    """
-    df = None
+# get_benchmark_returns('000001.SH')
 
-    if symbol == '000001.SH':
-        pro = ts.pro_api()
-        df = pro.index_daily(ts_code=symbol)
-        df.index = pd.DatetimeIndex(df['trade_date'])
-        df = df['close']
+def get_benchmark_returns(symbol, first_date, last_date):
+  cal = get_calendar('XSHG')
 
-    else:
-        itx_token = 'pk_6e35c09fd54f4275aa78a16f4bc62d49'
-        r = requests.get(
-            # 'https://api.iextrading.com/1.0/stock/{}/chart/5y'.format(symbol)
-            'https://cloud.iexapis.com/stable/stock/{}/chart/5y?token={}'.format(symbol, itx_token)
-        )
-        data = r.json()
-
-        df = pd.DataFrame(data)
-
-        df.index = pd.DatetimeIndex(df['date'])
-        df = df['close']
-
-    return df.sort_index().tz_localize('UTC').pct_change(1).iloc[1:]
-
-
-get_benchmark_returns('000001.SH')
+  dates = cal.sessions_in_range(first_date, last_date)
+  data = pd.DataFrame(0.0, index=dates, columns=['close'])
+  data = data['close']
+  return data.sort_index().iloc[1:]

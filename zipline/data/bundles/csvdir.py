@@ -119,7 +119,11 @@ def csvdir_bundle(environ,
         raise ValueError("%s is not a directory" % csvdir)
 
     if not tframes:
-        tframes = set(["daily", "minute"]).intersection(os.listdir(csvdir))
+        str_tframes=environ.get('TFRAMES')
+        if str_tframes:
+            tframes=set(str_tframes.split(','))
+        else:
+            tframes = set(["daily", "minute"]).intersection(os.listdir(csvdir))
 
         if not tframes:
             raise ValueError("'daily' and 'minute' directories "
@@ -223,4 +227,4 @@ def _pricing_iter(csvdir, symbols, metadata, divs_splits, show_progress):
             yield sid, dfr
 
 
-register_calendar_alias("CSVDIR", "NYSE")
+register_calendar_alias("CSVDIR", "XSHG")
