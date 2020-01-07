@@ -1,6 +1,3 @@
-#!/bin/sh
-
-codes=(
 000001.XSHE
 000002.XSHE
 000063.XSHE
@@ -301,9 +298,3 @@ codes=(
 603899.XSHG
 603986.XSHG
 603993.XSHG
-)
-
-for e in ${codes[*]} ; do
-    echo ${e}
-    sh run_sql_file.sh config/testDB_eastmoney.config sql/get_one_code.sql daily/${e}.csv ${e:0:6}
-done
