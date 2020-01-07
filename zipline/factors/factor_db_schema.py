@@ -339,5 +339,5 @@ class Fundamentals(Base):
     # modTime = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
 
 
-engine = create_engine('sqlite:////tmp/sqlitedb/data.db', echo=True)
+engine = create_engine('sqlite:////Users/jiangtianyu/ziplinedata/sqlitedb/data.db', echo=True)
 Base.metadata.create_all(engine)

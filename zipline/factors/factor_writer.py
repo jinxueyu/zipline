@@ -326,8 +326,8 @@ data_type_mapping={
 }
 
 def update_tb_fundamentals():
-    conn = sqlite3.connect("/tmp/sqlitedb/data.db")
-    df = pd.read_csv('/Users/jiangtianyu/ziplinedata/financial/financial_all/financial_all_2015_2019.csv',na_values=['\\N'],dtype=data_type_mapping)
+    conn = sqlite3.connect("/Users/jiangtianyu/ziplinedata/sqlitedb/data.db")
+    df = pd.read_csv('/Users/jiangtianyu/ziplinedata/financial/financial_all/financial_all_2005_2009.csv',na_values=['\\N'],dtype=data_type_mapping)
 
     df.to_sql('tb_fundamentals', conn, if_exists='append', index=False)
     print('ok')
