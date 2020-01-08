@@ -66,7 +66,7 @@ def check_uint32_safe(value, colname):
 
 
 @expect_element(invalid_data_behavior={'warn', 'raise', 'ignore'})
-def winsorise_uint32(df, invalid_data_behavior, column, *columns):
+def winsorise_uint32(df, invalid_data_behavior, columns):
     """Drops any record where a value would not fit into a uint32.
 
     Parameters
@@ -83,7 +83,7 @@ def winsorise_uint32(df, invalid_data_behavior, column, *columns):
     truncated : pd.DataFrame
         ``df`` with values that do not fit into a uint32 zeroed out.
     """
-    columns = list((column,) + columns)
+    columns = list(columns)
     mask = df[columns] > UINT32_MAX
 
     if invalid_data_behavior != 'ignore':
@@ -364,12 +364,12 @@ class BcolzDailyBarWriter(object):
             # we already have a ctable so do nothing
             return raw_data
 
-        winsorise_uint32(raw_data, invalid_data_behavior, 'volume', *OHLC)
+        winsorise_uint32(raw_data, invalid_data_behavior, columns=OHLC)
         processed = (raw_data[list(OHLC)] * 1000).round().astype('uint32')
         dates = raw_data.index.values.astype('datetime64[s]')
         check_uint32_safe(dates.max().view(np.int64), 'day')
         processed['day'] = dates.astype('uint32')
-        processed['volume'] = raw_data.volume.astype('uint32')
+        processed['volume'] = raw_data.volume.astype('uint64')
         return ctable.fromdataframe(processed)
 
 
