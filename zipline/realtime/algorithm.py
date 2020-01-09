@@ -8,7 +8,6 @@ from six import (
 class RealtimeAlgorithm(object):
 
     def __init__(self,script=None,algo_filename=None):
-
         self.algoscript = script
         self.namespace = {}
 
@@ -33,7 +32,7 @@ class RealtimeAlgorithm(object):
     def handle_data(self, data):
         if self._handle_data:
             self._handle_data(self, data)
-
+            
     def initialize(self, *args, **kwargs):
         """
         Call self._initialize with `self` made available to Zipline API

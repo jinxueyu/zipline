@@ -7,14 +7,14 @@ from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrConnectionClosed, ErrTimeout, ErrNoServers
 import logging
 import time
-from concurrent.futures import ThreadPoolExecutor
-
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
 class AlgorithmReactor(object):
   def __init__(self, algo_path=None, mq_url=None):
     self._algo_path = algo_path
     self._mq_url = mq_url
     self._algos = set()
+    # self._executor = ProcessPoolExecutor(max_workers=10)
     self._executor = ThreadPoolExecutor(max_workers=10)
     self._tasks = set()
 
@@ -37,17 +37,20 @@ class AlgorithmReactor(object):
     for algo in self._algos:
       algo.initialize()
 
+  def handle_data(self, algo, bar_data):
+    algo.handle_data(bar_data)
+
   async def message_handler(self, msg):
     subject = msg.subject
     reply = msg.reply
     data = msg.data.decode()
     logging.info("'{subject}':{data}".format(subject=subject, data=data))
 
-    for task in self._tasks:
-      if not task.done():
-        if not task.cancel():
-          print("task has not done, ")
-    self._tasks.clear()
+    # for task in self._tasks:
+    #   if not task.done():
+    #     if not task.cancel():
+    #       print("task has not done, ")
+    # self._tasks.clear()
 
     # print(time.time())
     last_time = time.time()
@@ -55,13 +58,14 @@ class AlgorithmReactor(object):
     bar_data = RealtimeBarData(minute_bar=data)
     for algo in self._algos:
       if algo.symbol == bar_data.get_symbol():
-        algo.handle_data(bar_data)
+        # algo.handle_data(bar_data)
         # task = self._executor.submit(algo.handle_data, (bar_data))
         # self._tasks.add(task)
+        self._executor.submit(self.handle_data, algo, bar_data)
       # algo.handle_data(data)
     # print(time.time())
     now = time.time() - last_time
-    print('cost seconds:%.6f' % now)
+    # print('cost seconds:%.6f' % now)
 
   def start(self):
     # MQ连接和订阅

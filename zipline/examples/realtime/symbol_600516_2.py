@@ -25,7 +25,7 @@ def handle_data(context, data):
     print('Client[{}] buy[{}] qty[{}] at price[{}], position[{}]'.format(
         context.client_id, context.symbol, context.qty_per_match, last_price,
         context.position))
-  elif last_price >= context.base_price * (1 + context.ratio):
+  elif last_price >= sell_price:
     if context.position >= context.qty_per_match:
       context.position -= context.qty_per_match
       context.base_price = last_price
