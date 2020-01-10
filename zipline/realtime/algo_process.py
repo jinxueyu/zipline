@@ -3,7 +3,7 @@ import os
 from algorithm import RealtimeAlgorithm
 from bardata import RealtimeBarData
 
-ALGO_PATH = '/Users/limeng/workspace/github/zipline/zipline/examples/realtime'
+ALGO_PATH = '/Users/limeng/workspace/github/zipline/zipline/examples/realtime/one'
 
 
 class AlgoProcess(Process):
@@ -20,23 +20,32 @@ class AlgoProcess(Process):
         with open(os.path.join(ALGO_PATH, file), 'r') as f:
           algotext = f.read()
           try:
-            ra = RealtimeAlgorithm(script=algotext, algo_filename=file)
+
+            def order_call_back(order_data):
+              self._order_queue.put(order_data)
+
+            ra = RealtimeAlgorithm(
+                script=algotext,
+                algo_filename=file,
+                order_callback=order_call_back)
             self.algos.add(ra)
           except:
             print("A ERROR!")
-        print('Algo Reactor loaded algo:{}'.format(file))
+        print('Process_Algo({}) loaded algo:{}'.format(os.getpid(), file))
     for algo in self.algos:
       algo.initialize()
 
   def run(self):
-    print('AlgoProcess start')
+    print('Process_Algo({}) ready'.format(os.getpid()))
     self.load_algos()
     while True:
       quote_data = self._quote_queue.get(True)
       bar_data = RealtimeBarData(minute_bar=quote_data)
       for algo in self.algos:
-          try:
-            if algo.symbol == bar_data.get_symbol():
-                algo.handle_data(bar_data)
-          except Exception as error:
-              print(error)
+        try:
+          if algo.symbol == bar_data.get_symbol():
+            print('Process_Algo({}) match stock symbol:{}'.format(
+                os.getpid(), algo.symbol))
+            algo.handle_data(bar_data)
+        except Exception as error:
+          print(error)

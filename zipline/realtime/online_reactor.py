@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-import asyncio,time
+import asyncio,time,os
 from nats.aio.client import Client as NATS
 from multiprocessing import Queue
 from algo_process import AlgoProcess
 from order_process import OrderProcess
+
+def order(data):
+    order_queue.put(data)
 
 async def run(loop):
     nc = NATS()
@@ -14,7 +17,7 @@ async def run(loop):
         subject = msg.subject
         reply = msg.reply
         data = msg.data.decode()
-        # print(data)
+        print('Process_QuoteSub({}) receive quote: {}'.format(os.getpid(),data))
         quote_queue.put(data)
 
     sid = await nc.subscribe("1_min_bar", cb=message_handler)
@@ -33,6 +36,7 @@ if __name__=='__main__':
 
     loop = asyncio.get_event_loop()
     loop.run_until_complete(run(loop))
+    print('Process_QuoteSub({}) ready'.format(os.getpid()))
     try:
         loop.run_forever()
     finally:
